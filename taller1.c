@@ -4,7 +4,7 @@ int main(){
     int suma, ingresos, s,num;
     s = 0;
     while (s != 1){
-        printf("Ingrese un valor del 1 al 7. ingrese 0 para finalizar\n");
+        printf("Ingrese un valor del 1 al 7. ingrese 0 para finalizar__");
         scanf("%d", &num);
         if (num == 0){
             s = s + 1;
@@ -12,7 +12,9 @@ int main(){
         }
         else{
             if (num>0 && num<8){
-            printf("El numero que ingreso es: %d\n",num);
+            printf("\nEl numero que ingreso es: %d\n\n",num);
+        }else{
+            printf("Error al ingresar el dato\n");
         }
         }
 
