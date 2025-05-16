@@ -1,7 +1,12 @@
 #include <stdio.h>
 
 int main(){
-    double promedio, suma, mayor, menor, d_estandar;
+    /* paso 1: eleva al cuadrado los factores x - promedio
+       paso 2: suma todos los factores sacados del paso 1, la variable se llama sum1
+       paso 3: divide el resultado del paso 2 por el promedio, esto se calcula al final
+       paso 4: saca la raiz*/
+
+    double promedio, suma, mayor, menor, d_estandar = 0, promedio_dinamico = 0, paso1 = 0,paso2 = 0,paso3 = 0 ,sum1 = 0, i;
     int ingresos, s, num, res_scanf;
     s = 0;
     ingresos = 0;
@@ -29,6 +34,15 @@ int main(){
                 if (num < menor){
                     menor = num;
                 }
+                promedio_dinamico = num / ingresos;
+                paso1 = (num - promedio_dinamico)*(num-promedio_dinamico);
+                sum1 = sum1 + paso1;
+                paso2 = sum1 / ingresos;
+                while (i < paso2){
+                    printf("");
+
+                }
+                
 
             }else{
                 printf("\nXXXXX ERROR AL INGRESAR (DATO NO VALIDO) XXXXX\n");
@@ -42,7 +56,9 @@ int main(){
         }
     }
     d_estandar = 2;
+
     promedio = suma / ingresos;
+    
     //se asegura de varie el mensaje de finalizacion
     if (ingresos > 0){
         printf("El promedio es: %.2f\nIngresaste %d notas validas\n", promedio, ingresos);
