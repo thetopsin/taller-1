@@ -1,5 +1,7 @@
 #include <stdio.h>
+//no agrego otra libreria que no sea la estandar, pero utilizo una funcion
 
+//metodo babilonico para aproximar raices
 double raizCuadrada(double n) {
     double x = n;
     double y = 1;
@@ -13,7 +15,7 @@ double raizCuadrada(double n) {
 }
 
 int main() {
-    double promedio, suma = 0, suma_cuadrados = 0, mayor, menor, d_estandar, num;
+    double promedio,varianza, suma = 0, suma_cuadrados = 0, mayor, menor, d_estandar, num;
     int ingresos = 0, s = 0, res_scanf;
     mayor = 0;
     menor = 8;
@@ -31,16 +33,18 @@ int main() {
             } else if (num > 0 && num <= 7) {
                 // Proceso si es un número válido
                 printf("El numero ingresado es: %.1lf\n", num);
-                suma += num;
-                suma_cuadrados += num * num;
-                ingresos++;
-
+                suma = suma + num;
+                suma_cuadrados = suma_cuadrados + (num * num);
+                ingresos = ingresos + 1;
+        //definen cual es el mayor de los datos ingresados
                 if (num > mayor) {
                     mayor = num;
                 }
                 if (num < menor) {
                     menor = num;
                 }
+                
+            //si no ingresa un caracter valido    
             } else {
                 printf("\nXXXXX ERROR AL INGRESAR (DATO NO VALIDO) XXXXX\n");
                 while (getchar() != '\n'); // Limpia el buffer
@@ -53,7 +57,7 @@ int main() {
 
     if (ingresos > 0) {
         promedio = suma / ingresos;
-        double varianza = (suma_cuadrados / ingresos) - (promedio * promedio);
+        varianza = (suma_cuadrados / ingresos) - (promedio * promedio);
         d_estandar = raizCuadrada(varianza);
 
         printf("\nResultados finales:\n");
