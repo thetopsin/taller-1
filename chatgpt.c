@@ -7,16 +7,16 @@ int main() {
     char nombre[100];
 
     // Loop para validar entrada del usuario
-    printf("¿Cual es su nombre?: ");
+    printf("Cual es su nombre?: ");
     scanf("%100s", nombre);
     printf("Ingrese la patente de su vehiculo: ");
     scanf("%6s", patente);
     while (domingo != 1 && domingo != 2) {
-        printf("¿Es domingo? \n[1] Sí\n[2] No\nOpción: ");
+        printf("Es domingo? \n[1] Si\n[2] No\nOpcion: ");
         scanf("%d", &domingo);
         if (domingo == 1) {
             // Es domingo
-            printf("¿Cuántos minutos estuvo estacionado?\n");
+            printf("Cuantos minutos estuvo estacionado?\n");
             scanf("%d", &minutos);
 
             if (minutos <= 10) {
@@ -39,21 +39,21 @@ int main() {
 
             char descuento[3] = "si";
 
-            printf("------------------------------------------------------\n");
-            printf("|             PARKING 'DONCELLA DE HIERRO'           |\n");
-            printf("| BOLETA DE ESTACIONAMIENTOPARQUE DONCELLA DE HIERRO |\n");
-            printf("------------------------------------------------------\n");
+            printf("--------------------------------------------\n");
+            printf("|       PARKING 'DONCELLA DE HIERRO'       |\n");
+            printf("|        BOLETA DE ESTACIONAMIENTO         |\n");
+            printf("--------------------------------------------\n");
             printf("| Nombre del cliente: %s\n",nombre);
             printf("| Patente del cliente: %s\n", patente);
             printf("| Horas: %d\n", hora);
             printf("| Minutos: %d\n", minutos);
             printf("| Monto: $%d\n", costo);
             printf("| Aplica descuento: %s\n", descuento);
-            printf("------------------------------------------------------\n");
+            printf("--------------------------------------------\n");
 
         } else if (domingo == 2) {
             // No es domingo
-            printf("¿Cuántos minutos estuvo estacionado?\n");
+            printf("Cuantos minutos estuvo estacionado?\n");
             scanf("%d", &minutos);
 
             if (minutos <= 10) {
@@ -82,12 +82,12 @@ int main() {
             printf("| Minutos: %d\n", minutos);
             printf("| Monto: $%d\n", costo);
             printf("| Aplica descuento: %s\n", descuento);
-            printf("-----------------------------------------------\n");
+            printf("--------------------------------------------\n");
 
         } else {
             // Entrada inválida
             printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
-            printf("XX    Ingrese una opción válida    XX\n");
+            printf("XX    Ingrese una opcion valida    XX\n");
             printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         }
     }
