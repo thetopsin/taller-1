@@ -1,74 +1,45 @@
 #include <stdio.h>
-//no agrego otra libreria que no sea la estandar, pero utilizo una funcion
-
-//metodo babilonico para aproximar raices
-double raizCuadrada(double n) {
-    double x = n;
-    double y = 1;
-    double e = 0.00001;
-
-    while (x - y > e || y - x > e) {
-        x = (x + y) / 2;
-        y = n / x;
-    }
-    return x;
-}
 
 int main() {
-    double promedio,varianza, suma = 0, suma_cuadrados = 0, mayor, menor, d_estandar, num;
-    int ingresos = 0, s = 0, res_scanf;
-    mayor = 0;
-    menor = 8;
+    int minutos, total_dia = 0, opcion, dia_es_domingo;
+    int historico_mes = 0;
 
-    printf("Ingrese valores entre 1 y 7. Ingrese 0 para finalizar:\n");
-    while (s != 1) {
-        printf("Valor #%d: ", ingresos + 1);
-        res_scanf = scanf("%lf", &num);
+    do {
+        printf("\nIngrese el tiempo de uso del estacionamiento (en minutos): ");
+        scanf("%d", &minutos);
 
-        if (res_scanf == 1) {
-            // Finaliza si el número es 0
-            if (num == 0) {
-                s = 1;
-                printf("\n------Ingreso de datos finalizado------\n");
-            } else if (num > 0 && num <= 7) {
-                // Proceso si es un número válido
-                printf("El numero ingresado es: %.1lf\n", num);
-                suma = suma + num;
-                suma_cuadrados = suma_cuadrados + (num * num);
-                ingresos = ingresos + 1;
-        //definen cual es el mayor de los datos ingresados
-                if (num > mayor) {
-                    mayor = num;
-                }
-                if (num < menor) {
-                    menor = num;
-                }
-                
-            //si no ingresa un caracter valido    
-            } else {
-                printf("\nXXXXX ERROR AL INGRESAR (DATO NO VALIDO) XXXXX\n");
-                while (getchar() != '\n'); // Limpia el buffer
-            }
+        printf("¿Es domingo? (1 para sí, 0 para no): ");
+        scanf("%d", &dia_es_domingo);
+
+        int costo = 0;
+
+        if (minutos <= 10) {
+            costo = 0;
+        } else if (minutos <= 25) {
+            costo = 3;
+        } else if (minutos <= 60) {
+            costo = 10;
         } else {
-            printf("\nXXXXX ERROR AL INGRESAR (DATO NO VALIDO) XXXXX\n");
-            while (getchar() != '\n'); // Limpia el buffer
+            int horas_completas = (minutos - 60 + 59) / 60; // Redondeo a la hora completa
+            costo = 10 + (horas_completas * 5);
         }
-    }
 
-    if (ingresos > 0) {
-        promedio = suma / ingresos;
-        varianza = (suma_cuadrados / ingresos) - (promedio * promedio);
-        d_estandar = raizCuadrada(varianza);
+        if (dia_es_domingo) {
+            costo -= costo * 0.1; // Descuento del 10%
+        }
 
-        printf("\nResultados finales:\n");
-        printf("Promedio: %.3f\n", promedio);
-        printf("Desviacion estandar: %f\n", d_estandar);
-        printf("Cantidad de valores ingresados: %d\n", ingresos);
-        printf("Numero mayor: %.1lf\n", mayor);
-        printf("Numero menor: %.1lf\n", menor);
-    } else {
-        printf("\nNo se ingresaron valores válidos.\n");
-    }
+        printf("Horas/min: %d | $ a pagar: $%d\n", minutos, costo);
+
+        total_dia += costo;
+        historico_mes += costo;
+
+        printf("\n¿Desea registrar otro uso? (1 para sí, 0 para no): ");
+        scanf("%d", &opcion);
+
+    } while (opcion == 1);
+
+    printf("\nResumen del día: $%d\n", total_dia);
+    printf("Histórico del mes: $%d\n", historico_mes);
 
     return 0;
 }
