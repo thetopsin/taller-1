@@ -1,45 +1,96 @@
 #include <stdio.h>
 
 int main() {
-    int minutos, total_dia = 0, opcion, dia_es_domingo;
-    int historico_mes = 0;
+    int hora = 0, minutos = 0, minuto2, domingo, costo = 0;
+    int dolar = 0;
+    char patente[6];
+    char nombre[100];
 
-    do {
-        printf("\nIngrese el tiempo de uso del estacionamiento (en minutos): ");
-        scanf("%d", &minutos);
+    // Loop para validar entrada del usuario
+    printf("¿Cual es su nombre?: ");
+    scanf("%100s", nombre);
+    printf("Ingrese la patente de su vehiculo: ");
+    scanf("%6s", patente);
+    while (domingo != 1 && domingo != 2) {
+        printf("¿Es domingo? \n[1] Sí\n[2] No\nOpción: ");
+        scanf("%d", &domingo);
+        if (domingo == 1) {
+            // Es domingo
+            printf("¿Cuántos minutos estuvo estacionado?\n");
+            scanf("%d", &minutos);
 
-        printf("¿Es domingo? (1 para sí, 0 para no): ");
-        scanf("%d", &dia_es_domingo);
+            if (minutos <= 10) {
+                costo = 0;
+            } else if (minutos <= 25) {
+                costo = 3;
+            } else if (minutos <= 60) {
+                costo = 10;
+            } else {
+                int horas_completas = (minutos - 60 + 59) / 60; // Redondeo a la hora completa
+                costo = 10 + (horas_completas * 5);
+            }
 
-        int costo = 0;
+            if (minutos >= 60) {
+                hora = minutos / 60;
+                minutos -= 60 * hora;
+            }
+            //descuento 10% por dia domingo
+            costo -=costo *0.1;
 
-        if (minutos <= 10) {
-            costo = 0;
-        } else if (minutos <= 25) {
-            costo = 3;
-        } else if (minutos <= 60) {
-            costo = 10;
+            char descuento[3] = "si";
+
+            printf("------------------------------------------------------\n");
+            printf("|             PARKING 'DONCELLA DE HIERRO'           |\n");
+            printf("| BOLETA DE ESTACIONAMIENTOPARQUE DONCELLA DE HIERRO |\n");
+            printf("------------------------------------------------------\n");
+            printf("| Nombre del cliente: %s\n",nombre);
+            printf("| Patente del cliente: %s\n", patente);
+            printf("| Horas: %d\n", hora);
+            printf("| Minutos: %d\n", minutos);
+            printf("| Monto: $%d\n", costo);
+            printf("| Aplica descuento: %s\n", descuento);
+            printf("------------------------------------------------------\n");
+
+        } else if (domingo == 2) {
+            // No es domingo
+            printf("¿Cuántos minutos estuvo estacionado?\n");
+            scanf("%d", &minutos);
+
+            if (minutos <= 10) {
+                costo = 0;
+            } else if (minutos <= 25) {
+                costo = 3;
+            } else if (minutos <= 60) {
+                costo = 10;
+            } else {
+                int horas_completas = (minutos - 60 + 59) / 60; // Redondeo a la hora completa
+                costo = 10 + (horas_completas * 5);
+            }
+            char descuento[3] = "no";
+            if (minutos >= 60) {
+                hora = minutos / 60;
+                minutos -= 60 * hora;
+            }
+
+            printf("--------------------------------------------\n");
+            printf("|       PARKING 'DONCELLA DE HIERRO'       |\n");
+            printf("|        BOLETA DE ESTACIONAMIENTO         |\n");
+            printf("--------------------------------------------\n");
+            printf("| Nombre del cliente: %s\n",nombre);
+            printf("| Patente del cliente: %s\n", patente);
+            printf("| Horas: %d\n", hora);
+            printf("| Minutos: %d\n", minutos);
+            printf("| Monto: $%d\n", costo);
+            printf("| Aplica descuento: %s\n", descuento);
+            printf("-----------------------------------------------\n");
+
         } else {
-            int horas_completas = (minutos - 60 + 59) / 60; // Redondeo a la hora completa
-            costo = 10 + (horas_completas * 5);
+            // Entrada inválida
+            printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+            printf("XX    Ingrese una opción válida    XX\n");
+            printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         }
-
-        if (dia_es_domingo) {
-            costo -= costo * 0.1; // Descuento del 10%
-        }
-
-        printf("Horas/min: %d | $ a pagar: $%d\n", minutos, costo);
-
-        total_dia += costo;
-        historico_mes += costo;
-
-        printf("\n¿Desea registrar otro uso? (1 para sí, 0 para no): ");
-        scanf("%d", &opcion);
-
-    } while (opcion == 1);
-
-    printf("\nResumen del día: $%d\n", total_dia);
-    printf("Histórico del mes: $%d\n", historico_mes);
+    }
 
     return 0;
 }
