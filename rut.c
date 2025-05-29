@@ -1,5 +1,28 @@
 #include <stdio.h>
-#include <string.h>
+
+char calcularDigitoVerificador(int rut);
+
+int main() {
+    int rut;
+    char digitoIngresado, digitoCalculado;
+
+    printf("Ingresa el número del RUT (sin dígito verificador): ");
+    scanf("%d", &rut);
+    printf("Ingresa el dígito verificador (puede ser K o un número): ");
+    scanf(" %c", &digitoIngresado);
+
+    digitoCalculado = calcularDigitoVerificador(rut);
+
+    if (digitoCalculado == digitoIngresado || 
+        (digitoCalculado == 'K' && (digitoIngresado == 'k' || digitoIngresado == 'K'))) {
+        printf("\ns¡El RUT es correcto!\n\n");
+    } else {
+        printf("¡¡¡Rut o dígito verificador incorrecto!!!\n");
+    }
+
+    return 0;
+}
+
 
 char calcularDigitoVerificador(int rut) {
     int suma = 0, multiplicador = 2;
@@ -24,25 +47,4 @@ char calcularDigitoVerificador(int rut) {
     } else {
         return resultado + '0';
     }
-}
-
-int main() {
-    int rut;
-    char digitoIngresado, digitoCalculado;
-
-    printf("Ingresa el número del RUT (sin dígito verificador): ");
-    scanf("%d", &rut);
-    printf("Ingresa el dígito verificador (puede ser K o un número): ");
-    scanf(" %c", &digitoIngresado);
-
-    digitoCalculado = calcularDigitoVerificador(rut);
-
-    if (digitoCalculado == digitoIngresado || 
-        (digitoCalculado == 'K' && (digitoIngresado == 'k' || digitoIngresado == 'K'))) {
-        printf("¡El RUT es correcto!\n");
-    } else {
-        printf("¡¡¡Rut o dígito verificador incorrecto!!!\n");
-    }
-
-    return 0;
 }
