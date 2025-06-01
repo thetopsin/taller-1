@@ -15,10 +15,10 @@ int main(){
 
     digito_cal = calculo(rut);
     if (digito_cal == digito_in || (digito_cal == 'k' && (digito_in == 'k' || digito_in == 'K'))){
-        printf("\n::El RUT es correcto\n");
-        printf("::El RUT completo es: %d-%c\n\n",rut,digito_in);
+        printf("\n::El RUT es valido\n");
+        printf("::El RUT es: %d-%c\n\n",rut,digito_in);
     }else{
-        printf("\n::El RUT ingresado es incorrecto\n\n");
+        printf("\n::El RUT ingresado no es valido\n\n");
     }
     return 0;
 }
