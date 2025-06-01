@@ -1,23 +1,29 @@
 #include <stdio.h>
 
-int modulo(int rut);
-int prueba(int rut);
+char calculo(int rut);
 int rut;
-char dig_ver;
-char ver;
+char digito_cal;
+char digito_in;
 
 
 int main(){
-    printf("digite su rut sin el digito verficador: ");
+    //aca ingresa los datos
+    printf("digite su RUT sin el digito verficador: ");
     scanf("%d", &rut);
     printf("ingrese digito verficador: ");
-    scanf("%c", ver);
-    prueba(rut);
-    printf("rut: %d\n", rut);
+    scanf(" %c", &digito_in);
 
+    digito_cal = calculo(rut);
+    if (digito_cal == digito_in || (digito_cal == 'k' && (digito_in == 'k' || digito_in == 'K'))){
+        printf("\n::El RUT es correcto\n");
+        printf("::El RUT completo es: %d-%c\n\n",rut,digito_in);
+    }else{
+        printf("\n::El RUT ingresado es incorrecto\n\n");
+    }
+    return 0;
 }
 
-int prueba(int rut){
+char calculo(int rut){
     int suma = 0, digito, multiplicador = 2, res;
     while (rut > 0){
         digito = rut % 10;
@@ -29,18 +35,15 @@ int prueba(int rut){
         rut /= 10;
     }
     res = suma % 11;
-    res = 11 - res;
-    if (res == 10){
-        dig_ver = 'k';
+    digito_cal = 11 - res;
+
+    if (digito_cal == 10){
+        return 'k';
+    }else if (res == 0){
+        return '0';
+    } else {
+        return (char)((11 - res) + '0');
     }
-    printf("res: %d\n",res);
+
 
 }
-/*int modulo(int rut){
-    int resultado = 0;
-    while (rut > 10){
-        rut = rut / 10;
-        printf("rut2: %d\n",rut);
-    }
-    return 0;
-}*/
